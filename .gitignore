@@ -1,0 +1,14 @@
+node_modules
+.gradle
+.idea
+installer/SmartTV-Media-Setup-*.exe
+*.log
+android-tv-app/app/build/
+android-tv-app/.gradle/
+android-tv-app/local.properties
+*.apk
+*.ap_
+*.dex
+*.jar
+*.bin
+local.properties

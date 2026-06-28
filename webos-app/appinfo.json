@@ -1,0 +1,15 @@
+{
+  "id": "com.smarttv.mediaplayer",
+  "version": "1.0.0",
+  "vendor": "SmartTV Media",
+  "type": "web",
+  "main": "index.html",
+  "title": "SmartTV Media",
+  "icon": "icon.png",
+  "largeIcon": "largeIcon.png",
+  "iconColor": "#1565C0",
+  "bgColor": "#1565C0",
+  "disableBackHistoryAPI": true,
+  "resolution": "1920x1080",
+  "supportPortraitMode": false
+}
