@@ -807,40 +807,19 @@
       DOM.serverInfo.textContent = 'Servidor local';
     }
 
-    // Quick initial load, then start background full scan
-    try {
-      const data = await fetchJSON(API.browse(''));
-      currentPath = data.path;
-      allItems = data.items;
-      currentPage = 0;
-      focusedIndex = 0;
-      renderBreadcrumb(data);
-      renderContent(data);
-      pushHistory(currentPath);
-    } catch (_) {
-      // silently fail, will retry on interaction
-    }
-    hideLoading();
+    // Load root folder directly
+    await browseDir('');
 
-    // Start with screen saver visible
-    DOM.screenSaver.classList.remove('hidden');
+    // Focus first item so TV remote works immediately
+    setTimeout(() => {
+      const first = DOM.fileList.querySelector('.file-item');
+      if (first) first.focus();
+    }, 200);
 
-    // Hide screen saver on any interaction or after timeout
-    const dismissSaver = () => {
-      DOM.screenSaver.classList.add('hidden');
-      // Retry browse if it failed (network may have been slow)
-      if (allItems.length === 0) {
-        browseDir(currentPath || '');
-      }
-    };
-    document.addEventListener('click', dismissSaver);
-    document.addEventListener('keydown', dismissSaver);
-    document.addEventListener('mousemove', dismissSaver);
-
-    // Auto-dismiss saver after 2s
-    setTimeout(dismissSaver, 2000);
+    // Hide screen saver initially (it's hidden by default via CSS .hidden)
+    // It will only show when idle for a long time (not implemented yet)
+    DOM.screenSaver.classList.add('hidden');
   }
 
-  // Fallback: if browseDir fails on first load, try again when saver is dismissed
   init();
 })();
