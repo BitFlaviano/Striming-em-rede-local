@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartTV Media Player</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="screen-saver" class="screen-saver hidden">
+    <div class="saver-content">
+      <div class="saver-icon">&#9654;</div>
+      <h1>SmartTV Media Player</h1>
+      <p>Pressione qualquer tecla para iniciar</p>
+    </div>
+  </div>
+
+  <div id="app" class="app">
+    <header class="header">
+      <div class="header-left">
+        <h1 class="app-title">Media Player</h1>
+        <span id="server-info" class="server-info"></span>
+      </div>
+      <div class="header-center">
+        <span id="server-badge" class="server-badge hidden">🖥️ Servidor: <span id="server-ip-display"></span></span>
+        <button id="btn-copy-ip" class="copy-ip-btn hidden" title="Copiar IP">📋</button>
+      </div>
+      <div class="header-right">
+        <span id="clock" class="clock"></span>
+      </div>
+    </header>
+
+    <main class="main">
+      <div id="view-browse" class="view active">
+        <div id="breadcrumb" class="breadcrumb"></div>
+        <div id="nav-bar" class="nav-bar">
+          <button id="btn-nav-back" class="nav-btn" disabled>←</button>
+          <button id="btn-nav-fwd" class="nav-btn" disabled>→</button>
+          <span id="nav-path" class="nav-path"></span>
+        </div>
+        <div id="file-list" class="file-list"></div>
+        <div id="manual-ip-bar" class="manual-ip-bar hidden">
+          <input type="text" id="manual-ip-input" class="manual-ip-input" placeholder="Digite o IP do computador (ex: 192.168.0.100)" />
+          <button id="btn-manual-ip" class="manual-ip-btn">Conectar</button>
+        </div>
+      </div>
+
+    </main>
+
+    <div id="player-overlay" class="player-overlay hidden">
+      <div class="player-container">
+        <div class="player-header">
+          <button id="btn-prev" class="ctrl-btn nav-media-btn">⏮</button>
+          <span id="player-title" class="player-title"></span>
+          <button id="btn-next" class="ctrl-btn nav-media-btn">⏭</button>
+          <button id="btn-close-player" class="btn-close">&times;</button>
+        </div>
+        <div class="player-content">
+          <video id="video-player" class="media-player hidden" autoplay></video>
+          <audio id="audio-player" class="media-player hidden" autoplay></audio>
+          <div id="image-viewer" class="image-viewer hidden">
+            <img id="image-display" class="image-display" alt="" />
+          </div>
+          <div id="unsupported-msg" class="unsupported-msg hidden">
+            <span class="unsupported-icon">&#9888;</span>
+            <p>Formato não suportado pelo navegador da TV.</p>
+            <p>Tente converter para MP4 (H.264 + AAC).</p>
+          </div>
+        </div>
+        <div class="player-controls">
+          <button id="btn-play-pause" class="ctrl-btn">&#9646;&#9646;</button>
+          <button id="btn-rewind" class="ctrl-btn">⏪ 10s</button>
+          <input type="range" id="seek-bar" class="seek-bar" value="0" min="0" step="0.1" />
+          <button id="btn-forward" class="ctrl-btn">10s ⏩</button>
+          <span id="time-display" class="time-display">00:00 / 00:00</span>
+          <button id="btn-fullscreen" class="ctrl-btn">&#9974;</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="loading" class="loading hidden">
+      <div class="spinner"></div>
+      <p>Carregando...</p>
+    </div>
+
+    <div id="error-toast" class="error-toast hidden"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

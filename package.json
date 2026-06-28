@@ -1,0 +1,15 @@
+{
+  "name": "smarttv-media-player",
+  "version": "1.0.0",
+  "description": "Aplicativo SmartTV para reproduzir mídia da rede local",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "glob": "^10.3.10",
+    "node-ssdp": "^4.0.1",
+    "xml2js": "^0.6.2"
+  }
+}

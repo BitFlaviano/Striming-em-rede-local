@@ -1,0 +1,10 @@
+{
+  "mediaDirs": [
+    "C:\\Users\\MASTER\\Videos",
+    "C:\\Users\\MASTER\\Music",
+    "C:\\Users\\MASTER\\Pictures",
+    "C:\\Users\\MASTER\\Desktop",
+    "C:\\Users\\MASTER\\Downloads"
+  ],
+  "port": 3000
+}

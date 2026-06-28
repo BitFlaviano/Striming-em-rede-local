@@ -1,0 +1,9 @@
+node_modules/
+android-tv-app/.gradle/
+android-tv-app/app/build/
+android-tv-app/local.properties
+android-tv-app/gradle/wrapper/gradle-wrapper.jar
+installer/*.exe
+installer/*.ico
+.DS_Store
+Thumbs.db
