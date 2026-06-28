@@ -807,20 +807,40 @@
       DOM.serverInfo.textContent = 'Servidor local';
     }
 
-    await browseDir('');
+    // Quick initial load, then start background full scan
+    try {
+      const data = await fetchJSON(API.browse(''));
+      currentPath = data.path;
+      allItems = data.items;
+      currentPage = 0;
+      focusedIndex = 0;
+      renderBreadcrumb(data);
+      renderContent(data);
+      pushHistory(currentPath);
+    } catch (_) {
+      // silently fail, will retry on interaction
+    }
+    hideLoading();
 
     // Start with screen saver visible
     DOM.screenSaver.classList.remove('hidden');
 
-    // Hide screen saver on any interaction
-    const dismissSaver = () => DOM.screenSaver.classList.add('hidden');
+    // Hide screen saver on any interaction or after timeout
+    const dismissSaver = () => {
+      DOM.screenSaver.classList.add('hidden');
+      // Retry browse if it failed (network may have been slow)
+      if (allItems.length === 0) {
+        browseDir(currentPath || '');
+      }
+    };
     document.addEventListener('click', dismissSaver);
     document.addEventListener('keydown', dismissSaver);
     document.addEventListener('mousemove', dismissSaver);
 
-    // Auto-dismiss saver after 3s if there's activity
-    setTimeout(dismissSaver, 3000);
+    // Auto-dismiss saver after 2s
+    setTimeout(dismissSaver, 2000);
   }
 
+  // Fallback: if browseDir fails on first load, try again when saver is dismissed
   init();
 })();
